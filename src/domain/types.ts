@@ -18,7 +18,12 @@ export interface Aluno {
   qr: string | null;
 }
 
-export type AlunoInput = Omit<Aluno, "id" | "qr">;
+export interface AlunoInput {
+  nome: string;
+  idade: number;
+  turma: string;
+  turno: TurnoNome;
+}
 
 export interface Presenca {
   id: string;
