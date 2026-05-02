@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { AlunoForm } from "@/components/cadastro/AlunoForm";
 import { AlunosTable } from "@/components/cadastro/AlunosTable";
+import { ImportAlunos } from "@/components/cadastro/ImportAlunos";
 import { useAlunos } from "@/hooks/useAlunos";
 import { usePresencasCountToday } from "@/hooks/usePresencasCountToday";
 import { pdfService } from "@/services/pdf.service";
