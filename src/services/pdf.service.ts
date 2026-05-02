@@ -22,7 +22,7 @@ export const pdfService = {
       head: [["Nome", "Idade", "Turma", "Turno"]],
       body: alunos.map((a) => [a.nome, a.idade ?? "—", a.turma, a.turno]),
       styles: { fontSize: 9 },
-      headStyles: { fillColor: [26, 102, 65] },
+      headStyles: { fillColor: [31, 138, 76] },
     });
     doc.save(`alunos-${new Date().toISOString().slice(0, 10)}.pdf`);
   },
@@ -43,7 +43,7 @@ export const pdfService = {
         }),
       ]),
       styles: { fontSize: 9 },
-      headStyles: { fillColor: [26, 102, 65] },
+      headStyles: { fillColor: [31, 138, 76] },
     });
     doc.save(`presencas-${dia}-${turno}.pdf`);
   },
