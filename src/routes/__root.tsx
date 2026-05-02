@@ -1,4 +1,4 @@
-import { Outlet, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
+import { Outlet, createRootRoute, HeadContent, Scripts, useRouterState } from "@tanstack/react-router";
 import { Toaster } from "@/components/ui/sonner";
 import { AppShell } from "@/components/layout/AppShell";
 import appCss from "../styles.css?url";
@@ -46,9 +46,12 @@ function RootShell({ children }: { children: React.ReactNode }) {
 }
 
 function RootComponent() {
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
   return (
     <AppShell>
-      <Outlet />
+      <div key={pathname} className="page-transition">
+        <Outlet />
+      </div>
       <Toaster richColors position="top-right" />
     </AppShell>
   );
