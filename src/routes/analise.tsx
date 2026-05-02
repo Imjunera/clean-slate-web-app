@@ -181,33 +181,36 @@ function AnalisePage() {
           <Line
             data={{
               labels: porDia.labels,
-              datasets: [{ label: "Presenças", data: porDia.data, borderColor: "#1a6641", tension: 0.3 }],
+              datasets: [{ label: "Presenças", data: porDia.data, borderColor: "#1f8a4c", backgroundColor: "#1f8a4c", tension: 0.3 }],
             }}
-            options={{ responsive: true, plugins: { legend: { display: false } } }}
+            options={{ responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }}
           />
         </ChartCard>
         <ChartCard title="Presentes vs Atrasos">
           <Doughnut
             data={{
               labels: presVsAtraso.labels,
-              datasets: [{ data: presVsAtraso.data, backgroundColor: ["#1a6641", "#e53e3e"] }],
+              datasets: [{ data: presVsAtraso.data, backgroundColor: ["#1f8a4c", "#d63a3a"] }],
             }}
+            options={{ responsive: true, maintainAspectRatio: false }}
           />
         </ChartCard>
         <ChartCard title="Presenças por turno">
           <Bar
             data={{
               labels: porTurno.labels,
-              datasets: [{ label: "Presentes", data: porTurno.presentes, backgroundColor: "#1a6641" }],
+              datasets: [{ label: "Presentes", data: porTurno.presentes, backgroundColor: "#1e63ad" }],
             }}
+            options={{ responsive: true, maintainAspectRatio: false }}
           />
         </ChartCard>
         <ChartCard title="Atrasos por turno">
           <Bar
             data={{
               labels: porTurno.labels,
-              datasets: [{ label: "Atrasos", data: porTurno.atrasos, backgroundColor: "#e53e3e" }],
+              datasets: [{ label: "Atrasos", data: porTurno.atrasos, backgroundColor: "#f2c500" }],
             }}
+            options={{ responsive: true, maintainAspectRatio: false }}
           />
         </ChartCard>
       </div>
