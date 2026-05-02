@@ -78,13 +78,12 @@ function LeitorPage() {
       }
 
       const status = calcularStatus(turno.nome);
+      const now = new Date();
       await presencasService.create({
         aluno_id: aluno.id,
-        nome: aluno.nome,
-        turma: aluno.turma,
-        turno: turno.nome,
         status,
-        horario_chegada: new Date().toISOString(),
+        horario_chegada: now.toISOString(),
+        data: now.toISOString().slice(0, 10),
       });
 
       if (status === "atrasado") notify.aviso("Atraso registrado", aluno.nome);
