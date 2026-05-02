@@ -1,5 +1,5 @@
 import { TURNOS } from "./turnos";
-import type { Turno } from "./types";
+import type { Turno, TurnoNome } from "./types";
 
 export function nowMinutes(): number {
   const d = new Date();
@@ -9,6 +9,17 @@ export function nowMinutes(): number {
 export function getTurnoAtual(): Turno | null {
   const m = nowMinutes();
   return TURNOS.find((t) => m >= t.inicio && m < t.fim) ?? null;
+}
+
+/** Returns the shift that contains the given timestamp, or null. */
+export function getTurnoForTimestamp(iso: string): Turno | null {
+  const d = new Date(iso);
+  const m = d.getHours() * 60 + d.getMinutes();
+  return TURNOS.find((t) => m >= t.inicio && m < t.fim) ?? null;
+}
+
+export function turnoNomeForTimestamp(iso: string): TurnoNome {
+  return getTurnoForTimestamp(iso)?.nome ?? "Manhã";
 }
 
 function pad(n: number): string {

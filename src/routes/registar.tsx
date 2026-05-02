@@ -47,13 +47,12 @@ function RegistarPage() {
         if (cancelled) return;
         if (exists) { setState({ kind: "duplicate", nome: aluno.nome }); return; }
         const status = calcularStatus(turno.nome);
+        const now = new Date();
         await presencasService.create({
           aluno_id: aluno.id,
-          nome: aluno.nome,
-          turma: aluno.turma,
-          turno: turno.nome,
           status,
-          horario_chegada: new Date().toISOString(),
+          horario_chegada: now.toISOString(),
+          data: now.toISOString().slice(0, 10),
         });
         if (!cancelled) setState({ kind: "ok", nome: aluno.nome, status });
       } catch (e) {
