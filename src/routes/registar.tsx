@@ -43,7 +43,7 @@ function RegistarPage() {
         if (!aluno) { setState({ kind: "not-found" }); return; }
         const turno = getTurnoAtual();
         if (!turno) { setState({ kind: "no-shift" }); return; }
-        const exists = await presencasService.existsForShiftToday(aluno.id, turno.nome);
+        const exists = await presencasService.existsToday(aluno.id);
         if (cancelled) return;
         if (exists) { setState({ kind: "duplicate", nome: aluno.nome }); return; }
         const status = calcularStatus(turno.nome);

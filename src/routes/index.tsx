@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { AlunoForm } from "@/components/cadastro/AlunoForm";
 import { AlunosTable } from "@/components/cadastro/AlunosTable";
+import { ImportAlunos } from "@/components/cadastro/ImportAlunos";
 import { useAlunos } from "@/hooks/useAlunos";
 import { usePresencasCountToday } from "@/hooks/usePresencasCountToday";
 import { pdfService } from "@/services/pdf.service";
@@ -21,7 +22,7 @@ export const Route = createFileRoute("/")({
 });
 
 function CadastroPage() {
-  const { alunos, loading, saving, create, update, remove, removeAll } = useAlunos();
+  const { alunos, loading, saving, create, update, remove, removeAll, reload } = useAlunos();
   const { count } = usePresencasCountToday();
   const [editing, setEditing] = useState<Aluno | null>(null);
   const [busca, setBusca] = useState("");
@@ -44,6 +45,8 @@ function CadastroPage() {
           <Card className="px-4 py-2"><CardContent className="p-0 text-sm">Hoje <span className="ml-2 font-bold">{count ?? "—"}</span></CardContent></Card>
         </div>
       </header>
+
+      <ImportAlunos onImported={reload} />
 
       <AlunoForm
         editing={editing}
