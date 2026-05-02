@@ -75,6 +75,19 @@ export const presencasService = {
     return (count ?? 0) > 0;
   },
 
+  /** One attendance per student per day. */
+  async existsToday(alunoId: string): Promise<boolean> {
+    const dia = todayISO();
+    const { count, error } = await supabase
+      .from(TABLE)
+      .select("id", { count: "exact", head: true })
+      .eq("aluno_id", alunoId)
+      .gte("horario_chegada", `${dia}T00:00:00`)
+      .lte("horario_chegada", `${dia}T23:59:59`);
+    if (error) throw error;
+    return (count ?? 0) > 0;
+  },
+
   async create(input: PresencaInsert): Promise<void> {
     const { error } = await supabase.from(TABLE).insert([input]);
     if (error) throw error;

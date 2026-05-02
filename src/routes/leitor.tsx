@@ -71,9 +71,9 @@ function LeitorPage() {
       const aluno = await alunosService.getById(alunoId);
       if (!aluno) { notify.erro("Aluno não encontrado"); return; }
 
-      const exists = await presencasService.existsForShiftToday(aluno.id, turno.nome);
+      const exists = await presencasService.existsToday(aluno.id);
       if (exists) {
-        notify.info("Já registrado", `${aluno.nome} já marcou presença neste turno.`);
+        notify.info("Já registrado", `${aluno.nome} já marcou presença hoje.`);
         return;
       }
 
