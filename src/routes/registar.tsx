@@ -27,7 +27,7 @@ type State =
   | { kind: "no-shift" }
   | { kind: "duplicate"; nome: string }
   | { kind: "ok"; nome: string; status: "presente" | "atrasado" }
-  | { kind: "error"; message: string };
+  | { kind: "error" };
 
 function RegistarPage() {
   const { id } = Route.useSearch();
