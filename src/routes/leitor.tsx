@@ -9,7 +9,7 @@ import { useTurnoAtivo } from "@/hooks/useTurno";
 import { presencasService } from "@/services/presencas.service";
 import { alunosService } from "@/services/alunos.service";
 import { calcularStatus } from "@/domain/status";
-import { notify } from "@/lib/notify";
+import { notify, uiError } from "@/lib/notify";
 import { formatTime } from "@/lib/format";
 import type { Presenca } from "@/domain/types";
 
@@ -43,7 +43,7 @@ function LeitorPage() {
     try {
       setRegistros(await presencasService.listByShiftToday(turno.nome));
     } catch (e) {
-      notify.erro("Erro ao carregar chegadas", (e as Error).message);
+      notify.erro("Erro ao carregar chegadas", uiError(e));
     } finally {
       setLoading(false);
     }
@@ -91,7 +91,7 @@ function LeitorPage() {
 
       await reload();
     } catch (e) {
-      notify.erro("Erro ao registrar", (e as Error).message);
+      notify.erro("Erro ao registrar", uiError(e));
     }
   }, [turno, reload]);
 

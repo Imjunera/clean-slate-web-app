@@ -27,7 +27,7 @@ type State =
   | { kind: "no-shift" }
   | { kind: "duplicate"; nome: string }
   | { kind: "ok"; nome: string; status: "presente" | "atrasado" }
-  | { kind: "error"; message: string };
+  | { kind: "error" };
 
 function RegistarPage() {
   const { id } = Route.useSearch();
@@ -56,7 +56,9 @@ function RegistarPage() {
         });
         if (!cancelled) setState({ kind: "ok", nome: aluno.nome, status });
       } catch (e) {
-        if (!cancelled) setState({ kind: "error", message: (e as Error).message });
+        // eslint-disable-next-line no-console
+        console.error(e);
+        if (!cancelled) setState({ kind: "error" });
       }
     }
     void run();
@@ -79,7 +81,7 @@ function RegistarPage() {
               subtitle={state.nome}
             />
           )}
-          {state.kind === "error" && <Message icon="✕" title="Erro" subtitle={state.message} />}
+          {state.kind === "error" && <Message icon="✕" title="Erro" subtitle="Não foi possível registrar agora. Tente novamente." />}
         </CardContent>
       </Card>
     </div>
