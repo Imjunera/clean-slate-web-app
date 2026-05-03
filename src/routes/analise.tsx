@@ -22,7 +22,7 @@ import { presencasService } from "@/services/presencas.service";
 import { alunosService } from "@/services/alunos.service";
 import { TURNO_NOMES } from "@/domain/turnos";
 import { dayKey } from "@/lib/format";
-import { notify } from "@/lib/notify";
+import { notify, uiError } from "@/lib/notify";
 import type { Aluno, Presenca, TurnoNome } from "@/domain/types";
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, BarElement, ArcElement, Title, Tooltip, Legend);
@@ -67,7 +67,7 @@ function AnalisePage() {
       setRegistros(regs);
       setAlunos(als);
     } catch (e) {
-      notify.erro("Erro ao carregar análise", (e as Error).message);
+      notify.erro("Erro ao carregar análise", uiError(e));
     } finally {
       setLoading(false);
     }

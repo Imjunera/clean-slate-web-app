@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { alunosService } from "@/services/alunos.service";
 import { qrService } from "@/services/qr.service";
-import { notify } from "@/lib/notify";
+import { notify, uiError } from "@/lib/notify";
 import type { Aluno, AlunoInput } from "@/domain/types";
 
 export function useAlunos() {
@@ -14,7 +14,7 @@ export function useAlunos() {
     try {
       setAlunos(await alunosService.list());
     } catch (e) {
-      notify.erro("Erro ao carregar", (e as Error).message);
+      notify.erro("Erro ao carregar", uiError(e));
       setAlunos([]);
     } finally {
       setLoading(false);
@@ -34,7 +34,7 @@ export function useAlunos() {
       notify.sucesso("Aluno cadastrado", input.nome);
       await reload();
     } catch (e) {
-      notify.erro("Erro ao salvar", (e as Error).message);
+      notify.erro("Erro ao salvar", uiError(e));
       throw e;
     } finally {
       setSaving(false);
@@ -50,7 +50,7 @@ export function useAlunos() {
       notify.sucesso("Aluno atualizado", input.nome);
       await reload();
     } catch (e) {
-      notify.erro("Erro ao atualizar", (e as Error).message);
+      notify.erro("Erro ao atualizar", uiError(e));
       throw e;
     } finally {
       setSaving(false);
@@ -63,7 +63,7 @@ export function useAlunos() {
       notify.sucesso("Aluno excluído");
       await reload();
     } catch (e) {
-      notify.erro("Erro ao excluir", (e as Error).message);
+      notify.erro("Erro ao excluir", uiError(e));
     }
   }, [reload]);
 
@@ -73,7 +73,7 @@ export function useAlunos() {
       notify.sucesso("Todos os alunos foram apagados");
       await reload();
     } catch (e) {
-      notify.erro("Erro ao apagar", (e as Error).message);
+      notify.erro("Erro ao apagar", uiError(e));
     }
   }, [reload]);
 

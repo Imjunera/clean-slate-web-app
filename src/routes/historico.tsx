@@ -11,7 +11,7 @@ import { presencasService } from "@/services/presencas.service";
 import { pdfService } from "@/services/pdf.service";
 import { TURNO_NOMES } from "@/domain/turnos";
 import { dayKey, formatDate, formatTime } from "@/lib/format";
-import { notify } from "@/lib/notify";
+import { notify, uiError } from "@/lib/notify";
 import type { Presenca, TurnoNome } from "@/domain/types";
 
 export const Route = createFileRoute("/historico")({
@@ -38,7 +38,7 @@ function HistoricoPage() {
       try {
         setRegistros(await presencasService.listAll());
       } catch (e) {
-        notify.erro("Erro ao carregar histórico", (e as Error).message);
+        notify.erro("Erro ao carregar histórico", uiError(e));
       } finally {
         setLoading(false);
       }

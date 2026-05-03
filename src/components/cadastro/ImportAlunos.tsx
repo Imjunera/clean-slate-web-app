@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { parseAlunosFile, type ParseResult } from "@/lib/importAlunos";
 import { alunosService } from "@/services/alunos.service";
 import { qrService } from "@/services/qr.service";
-import { notify } from "@/lib/notify";
+import { notify, uiError } from "@/lib/notify";
 
 interface Props {
   onImported: () => void | Promise<void>;
@@ -39,7 +39,7 @@ export function ImportAlunos({ onImported }: Props) {
         );
       }
     } catch (e) {
-      notify.erro("Erro ao ler arquivo", (e as Error).message);
+      notify.erro("Erro ao ler arquivo", uiError(e));
     }
   }
 
