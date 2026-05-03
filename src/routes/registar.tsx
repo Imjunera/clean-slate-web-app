@@ -56,7 +56,9 @@ function RegistarPage() {
         });
         if (!cancelled) setState({ kind: "ok", nome: aluno.nome, status });
       } catch (e) {
-        if (!cancelled) setState({ kind: "error", message: (e as Error).message });
+        // eslint-disable-next-line no-console
+        console.error(e);
+        if (!cancelled) setState({ kind: "error" });
       }
     }
     void run();
