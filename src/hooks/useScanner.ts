@@ -37,7 +37,9 @@ export function useScanner({ onDecode, fps = 10 }: UseScannerOptions) {
       );
       setActive(true);
     } catch (e) {
-      setError((e as Error).message);
+      // eslint-disable-next-line no-console
+      console.error(e);
+      setError("Não foi possível iniciar a câmera.");
       instanceRef.current = null;
       setActive(false);
     }
