@@ -81,7 +81,7 @@ function RegistarPage() {
               subtitle={state.nome}
             />
           )}
-          {state.kind === "error" && <Message icon="✕" title="Erro" subtitle={state.message} />}
+          {state.kind === "error" && <Message icon="✕" title="Erro" subtitle="Não foi possível registrar agora. Tente novamente." />}
         </CardContent>
       </Card>
     </div>
